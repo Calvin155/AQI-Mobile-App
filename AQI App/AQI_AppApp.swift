@@ -11,7 +11,18 @@ import SwiftUI
 struct AQI_AppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Label("Home", systemImage: "house.fill")
+                    }
+                
+                ViewAirQualityData()
+                    .tabItem {
+                        Label("Air Quality", systemImage: "wind")
+                    }
+            }
         }
     }
 }
+
