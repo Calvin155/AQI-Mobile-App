@@ -17,12 +17,12 @@ struct AQI_AppApp: App {
                         Label("Home", systemImage: "house.fill")
                     }
                 
-                ViewAirQualityData()
+                CombinedAirQualityView()
                     .tabItem {
                         Label("Air Quality", systemImage: "wind")
                     }
+            
             }
         }
     }
 }
-

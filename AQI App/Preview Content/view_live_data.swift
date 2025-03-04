@@ -26,20 +26,18 @@ struct ViewAirQualityData: View {
     @State private var pm1_0: Double = 0
     @State private var pm2_5: Double = 0
     @State private var pm10: Double = 0
-    @State private var co2: Double = 0
-    @State private var temperature: Double = 0
+    @State private var co2_ppm: Double = 0
+    @State private var co2_perc: Double = 0
     @State private var outdoortemperature: Double = 0
-    @State private var humidity: Double = 0
     @State private var timer: Timer?
-    @State private var precipitation: Double = 0
     @State private var pm1_0Data: [Double] = []
     @State private var pm2_5Data: [Double] = []
     @State private var pm10Data: [Double] = []
 
-    let raspberryPiIP = "192.168.1.35"
+    let webServerIp = "52.212.232.158"
     
-    var pmAPI: String { "http://\(raspberryPiIP):8000/aqi_pm_data" }
-    var co2API: String { "http://\(raspberryPiIP):8000/aqi_co2_temp_humidity_data" }
+    var pmAPI: String { "http://\(webServerIp):8000/aqi_pm_data"}
+    var co2API: String { "http://\(webServerIp):8000/aqi_co2_temp_humidity_data"}
     var metEireannAPI: String {"https://api.open-meteo.com/v1/forecast?latitude=52.6680&longitude=-8.4756&current=temperature_2m,precipitation"}
 
     var body: some View {
@@ -53,13 +51,9 @@ struct ViewAirQualityData: View {
                 
                 VStack(spacing: 10) {
                     HStack {
-                        createDataView(title: "CO2", value: co2, isPPM: true)
-                        createDataView(title: "Indoor Temp", value: temperature, isTemp: true)
+                        createDataView(title: "CO2%", value: co2_perc, isPercentage: true)
+                        createDataView(title: "CO2ppm", value: co2_ppm, isPPM: true)
                         createDataView(title: "Outdoor Temp", value: outdoortemperature, isTemp: true)
-                    }
-                    HStack {
-                        createDataView(title: "Humidity", value: humidity, isPercentage: true)
-                        createDataView(title: "Percipitation", value: precipitation * 100, isPercentage: true)
                     }
                     HStack {
                         createDataView(title: "PM 1.0", value: pm1_0, isPPM: true)
@@ -136,7 +130,7 @@ struct ViewAirQualityData: View {
 
     func fetchAirQualityData() {
         fetchPMData()
-        fetchCO2TempHumidityData()
+        fetchCO2Data()
         fetchOutsideMetrics()
     }
     
@@ -162,7 +156,6 @@ struct ViewAirQualityData: View {
                         self.pm2_5 = pmData[2].value
                         self.pm10 = pmData[1].value
 
-                        // Add to historical data
                         self.pm1_0Data.append(pmData[0].value)
                         self.pm2_5Data.append(pmData[2].value)
                         self.pm10Data.append(pmData[1].value)
@@ -173,8 +166,9 @@ struct ViewAirQualityData: View {
             }
         }.resume()
     }
+
     
-    func fetchCO2TempHumidityData() {
+    func fetchCO2Data() {
         guard let url = URL(string: co2API) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -191,10 +185,9 @@ struct ViewAirQualityData: View {
             do {
                 let co2Data = try JSONDecoder().decode([AirQualityDataNow].self, from: data)
                 DispatchQueue.main.async {
-                    if co2Data.count >= 3 {
-                        self.co2 = co2Data[0].value
-                        self.temperature = co2Data[1].value
-                        self.humidity = co2Data[2].value
+                    if co2Data.count >= 2 {
+                        self.co2_ppm = co2Data[0].value
+                        self.co2_perc = co2Data[1].value
                     }
                 }
             } catch {
@@ -202,6 +195,7 @@ struct ViewAirQualityData: View {
             }
         }.resume()
     }
+
     
     func fetchOutsideMetrics() {
         guard let url = URL(string: metEireannAPI) else { return }
@@ -221,7 +215,6 @@ struct ViewAirQualityData: View {
                 let weatherData = try JSONDecoder().decode(WeatherDataLocal.self, from: data)
                 DispatchQueue.main.async {
                     self.outdoortemperature = weatherData.current.temperature_2m
-                    self.precipitation = weatherData.current.precipitation
                 }
             } catch {
                 print("Error decoding weather data: \(error.localizedDescription)")
@@ -230,7 +223,7 @@ struct ViewAirQualityData: View {
     }
 
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 15, repeats: true) { _ in
             self.fetchAirQualityData()
         }
     }
