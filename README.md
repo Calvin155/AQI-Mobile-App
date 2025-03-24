@@ -36,7 +36,9 @@ In the event of no data - Check your FastApi servers IP address & ensure that is
 
 
 Aim of this Mobile App:
-
-Mobile App that can read data using rest-api's, provide end user with live updates of Co2 & PM data, show good, bad & offer recomendations to end user.
+Fetch & display real-time CO₂ & PM levels.
+Show/Indicate good or bad air quality.
+Provide recommendations based on air quality.
+Enable data analysis & API integrations for other applications.
 
 Alternatively if you do not have an iPhone(the frontend React Web App is avail to display data in a web application - Both apps consume Rest-Api's & the Api's can also be used for other apps or analysis)
