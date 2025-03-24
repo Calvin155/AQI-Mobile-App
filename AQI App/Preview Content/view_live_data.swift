@@ -162,7 +162,7 @@ struct ViewAirQualityData: View {
                     }
                 }
             } catch {
-                print("Error decoding PM data: \(error)")
+                print("Error: PM data: \(error)")
             }
         }.resume()
     }
@@ -191,7 +191,7 @@ struct ViewAirQualityData: View {
                     }
                 }
             } catch {
-                print("Error decoding CO2/Temp/Humidity data: \(error)")
+                print("Error: CO2/Temp/Humidity data: \(error)")
             }
         }.resume()
     }
@@ -217,7 +217,7 @@ struct ViewAirQualityData: View {
                     self.outdoortemperature = weatherData.current.temperature_2m
                 }
             } catch {
-                print("Error decoding weather data: \(error.localizedDescription)")
+                print("Error: weather data: \(error.localizedDescription)")
             }
         }.resume()
     }
