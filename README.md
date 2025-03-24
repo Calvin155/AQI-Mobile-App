@@ -1,3 +1,5 @@
+Author: Calvin Lynch - K00271788
+
 Mobile App Developed Using SwiftUI. 
 
 App Shows live data(Co2 & Particulate Matter) & refreshes every 15 seconds. 
