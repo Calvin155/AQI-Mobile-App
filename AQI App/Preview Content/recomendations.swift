@@ -79,47 +79,47 @@ struct RecommendationsView: View {
     func getPMRecommendation(value: Double) -> String {
         switch value {
         case 0..<12:
-            return "✅ Low Particles - Safe & No Risk of prolonged exposure."
+            return "Low Particles - Safe & No Risk of prolonged exposure."
         case 12..<35:
-            return "😷 Moderate air quality. Sensitive groups should limit prolonged exposure."
+            return "Moderate air quality. Sensitive groups should limit prolonged exposure."
         case 35..<55:
-            return "🚨 Unhealthy for sensitive groups. Consider wearing a mask indoors."
+            return "Unhealthy for sensitive groups. Consider wearing a mask indoors."
         case 55..<150:
-            return "⚠️ Unhealthy air quality. Reduce indoor activities."
+            return "Unhealthy air quality. Reduce indoor activities."
         case 150..<250:
-            return "🛑 Very unhealthy air. Stay indoors with ventilation."
+            return "Very unhealthy air. Stay indoors with ventilation."
         default:
-            return "☠️ Hazardous! Stay indoors, wear an N95 mask if necessary."
+            return "Hazardous! Stay indoors, wear an N95 mask if necessary."
         }
     }
 
     func getTemperatureRecommendation(value: Double) -> String {
         switch value {
         case ..<0:
-            return "❄️ Freezing temperatures! Stay warm and limit exposure to cold."
+            return "Freezing temperatures! Stay warm and limit exposure to cold."
         case 0..<10:
-            return "🥶 Cold weather. Dress warmly if going outside."
+            return "Cold weather. Dress warmly if going outside."
         case 10..<25:
-            return "😊 Comfortable temperature. Ideal for indoor activities."
+            return "Comfortable temperature. Ideal for indoor activities."
         case 25..<35:
-            return "🥵 Warm weather. Stay hydrated and avoid prolonged exposure to heat."
+            return "Warm weather. Stay hydrated and avoid prolonged exposure to heat."
         default:
-            return "🔥 Extremely hot! Stay cool and limit exposure to heat."
+            return "Extremely hot! Stay cool and limit exposure to heat."
         }
     }
 
     func getCO2Recommendation(value: Double) -> String {
         switch value {
         case ..<400:
-            return "✅ Normal CO2 levels - Safe air quality."
+            return "Normal CO2 levels - Safe air quality."
         case 400..<1_000:
-            return "😷 Slightly High CO2 levels. Improve ventilation if possible but not Dangerous."
+            return "Slightly High CO2 levels. Improve ventilation if possible but not Dangerous."
         case 1_000..<2_000:
-            return "⚠️ High CO2 levels. Consider ventilating your space."
+            return "High CO2 levels. Consider ventilating your space."
         case 2_000..<5_000:
-            return "🚨 Very high CO2 levels. Ventilate The Areas if Possible."
+            return "Very high CO2 levels. Ventilate The Areas if Possible."
         default:
-            return "☠️ Hazardous CO2 levels. Extremely High Levels - Leave the Area Now."
+            return "Hazardous CO2 levels. Extremely High Levels - Leave the Area Now."
         }
     }
 
