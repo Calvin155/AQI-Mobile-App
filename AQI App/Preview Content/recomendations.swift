@@ -79,30 +79,30 @@ struct RecommendationsView: View {
     func getPMRecommendation(value: Double) -> String {
         switch value {
         case 0..<12:
-            return "Low Particles - Safe & No Risk of prolonged exposure."
+            return "Low Particles - Safe & No Risk of exposure."
         case 12..<35:
-            return "Moderate air quality. Sensitive groups should limit prolonged exposure."
+            return "Moderate air quality. Sensitive groups should reduce  exposure."
         case 35..<55:
-            return "Unhealthy for sensitive groups. Consider wearing a mask indoors."
+            return "Unhealthy for sensitive groups. Consider wearing a mask if indoors."
         case 55..<150:
-            return "Unhealthy air quality. Reduce indoor activities."
+            return "Unhealthy air quality."
         case 150..<250:
-            return "Very unhealthy air. Stay indoors with ventilation."
+            return "Very unhealthy air. Consider Ventilation."
         default:
-            return "Hazardous! Stay indoors, wear an N95 mask if necessary."
+            return "Hazardous!"
         }
     }
 
     func getTemperatureRecommendation(value: Double) -> String {
         switch value {
         case ..<0:
-            return "Freezing temperatures! Stay warm and limit exposure to cold."
+            return "Very Cold temperatures! Stay warm and reduce exposure to cold."
         case 0..<10:
             return "Cold weather. Dress warmly if going outside."
         case 10..<25:
-            return "Comfortable temperature. Ideal for indoor activities."
+            return "Comfortable temperature."
         case 25..<35:
-            return "Warm weather. Stay hydrated and avoid prolonged exposure to heat."
+            return "Warm weather. Stay hydrated."
         default:
             return "Extremely hot! Stay cool and limit exposure to heat."
         }
