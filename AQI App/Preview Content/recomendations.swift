@@ -81,7 +81,7 @@ struct RecommendationsView: View {
         case 0..<12:
             return "Low Particles - Safe & No Risk of exposure."
         case 12..<35:
-            return "Moderate air quality. Sensitive groups should reduce  exposure."
+            return "Moderate air quality. Sensitive groups should reduce exposure."
         case 35..<55:
             return "Unhealthy for sensitive groups. Consider wearing a mask if indoors."
         case 55..<150:
@@ -96,9 +96,9 @@ struct RecommendationsView: View {
     func getTemperatureRecommendation(value: Double) -> String {
         switch value {
         case ..<0:
-            return "Very Cold temperatures! Stay warm and reduce exposure to cold."
+            return "Very Cold! Stay warm and reduce exposure to cold."
         case 0..<10:
-            return "Cold weather. Dress warmly if going outside."
+            return "Cold weather. Dress warm if going outside."
         case 10..<25:
             return "Comfortable temperature."
         case 25..<35:
